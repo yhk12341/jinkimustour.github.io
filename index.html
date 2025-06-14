@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미국 동부 여행 플래너 V5</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        body { font-family: 'Noto Sans KR', 'Inter', sans-serif; scroll-behavior: smooth; }
+        .section-title { font-family: 'Noto Sans KR', sans-serif; font-weight: 900; }
+        .tab-button.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 700; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; }
+        .status-toggle.pending { background-color: #fee2e2; color: #b91c1c; }
+        .status-toggle.paid { background-color: #dcfce7; color: #166534; }
+        [contenteditable]:focus { outline: 2px solid #3b82f6; background-color: #eff6ff; border-radius: 4px; }
+        .timeline-item { position: relative; padding-left: 3rem; }
+        .timeline-item::before { content: ''; position: absolute; left: 1rem; top: 1.5rem; bottom: -1.5rem; width: 2px; background-color: #e5e7eb; }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-icon { position: absolute; left: 0; top: 0.25rem; }
+        .checklist-item-text { min-width: 50px; }
+        .delete-btn { opacity: 0; transition: opacity 0.2s; }
+        .checklist-section:hover .delete-section-btn, .checklist-item:hover .delete-btn { opacity: 1; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="relative bg-white shadow-md">
+        <div class="absolute inset-0"><img src="https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg" class="w-full h-full object-cover" alt="New York Times Square"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-black/30"></div>
+        <div class="relative max-w-7xl mx-auto py-20 px-4 sm:py-28 text-center text-white"><h1 class="text-4xl md:text-6xl font-extrabold tracking-tight section-title">미국 동부 여행 🇺🇸</h1><p class="mt-4 text-xl md:text-2xl font-semibold">2025. 10. 23 (목) - 2025. 11. 06 (목)</p></div>
+    </header>
+
+    <div class="max-w-7xl mx-auto -mt-10 relative z-10 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-t-lg shadow-lg border-b border-gray-200 sticky top-0 z-20">
+            <nav class="flex justify-around" id="main-tabs">
+                <button data-tab="overview" class="tab-button active w-full py-4 px-2 text-center border-b-2 border-transparent text-sm sm:text-base transition">여행 개요</button>
+                <button data-tab="itinerary" class="tab-button w-full py-4 px-2 text-center border-b-2 border-transparent text-sm sm:text-base transition">상세 일정</button>
+                <button data-tab="management" class="tab-button w-full py-4 px-2 text-center border-b-2 border-transparent text-sm sm:text-base transition">예산/준비</button>
+                <button data-tab="info" class="tab-button w-full py-4 px-2 text-center border-b-2 border-transparent text-sm sm:text-base transition">맛집/정보</button>
+            </nav>
+        </div>
+
+        <main class="bg-white rounded-b-lg shadow-lg p-4 sm:p-8">
+            <div id="overview" class="tab-content"><h2 class="section-title text-3xl font-bold mb-6">🗺️ 여행 개요</h2><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div class="bg-gray-50 p-6 rounded-lg"><h3 class="font-bold text-xl mb-6">이동 경로</h3><div class="space-y-12"><div class="timeline-item"><div class="timeline-icon w-8 h-8 flex items-center justify-center rounded-full bg-white border-2 border-gray-200"><ion-icon name="business-outline" class="text-xl text-blue-500"></ion-icon></div><div><strong>뉴욕</strong><p class="text-sm text-gray-600">10/23 - 10/26 | 미드타운 & 맨해튼 중심</p></div></div><div class="timeline-item"><div class="timeline-icon w-8 h-8 flex items-center justify-center rounded-full bg-white border-2 border-gray-200"><ion-icon name="water-outline" class="text-xl text-cyan-500"></ion-icon></div><div><strong>나이아가라</strong><p class="text-sm text-gray-600">10/26 - 10/27 | 대자연의 경이</p></div></div><div class="timeline-item"><div class="timeline-icon w-8 h-8 flex items-center justify-center rounded-full bg-white border-2 border-gray-200"><ion-icon name="business-outline" class="text-xl text-blue-500"></ion-icon></div><div><strong>뉴욕</strong><p class="text-sm text-gray-600">10/27 - 11/02 | 다운타운 & 브루클린</p></div></div><div class="timeline-item"><div class="timeline-icon w-8 h-8 flex items-center justify-center rounded-full bg-white border-2 border-gray-200"><ion-icon name="flag-outline" class="text-xl text-red-500"></ion-icon></div><div><strong>워싱턴 D.C.</strong><p class="text-sm text-gray-600">11/02 - 11/03 | 미국의 수도</p></div></div><div class="timeline-item"><div class="timeline-icon w-8 h-8 flex items-center justify-center rounded-full bg-white border-2 border-gray-200"><ion-icon name="business-outline" class="text-xl text-blue-500"></ion-icon></div><div><strong>뉴욕</strong><p class="text-sm text-gray-600">11/03 - 11/06 | 퀸즈 & 마지막 여정</p></div></div></div></div><div class="bg-gray-50 p-6 rounded-lg"><h3 class="font-bold text-xl mb-4">전체 경로 보기</h3><p class="mb-4">여행에서 방문할 모든 장소가 표시된 지도입니다.</p><a href="https://www.google.com/maps/d/edit?mid=1U-2rTW6OfqgexwLOz_B7zhMLDacTHQw&usp=sharing" target="_blank" class="inline-flex items-center gap-2 bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition"><ion-icon name="map-outline"></ion-icon>구글 지도로 전체 목록 보기</a></div></div></div>
+            <div id="itinerary" class="tab-content hidden"><h2 class="section-title text-3xl font-bold mb-6">🗓️ 상세 일정</h2><div class="space-y-4" id="itinerary-accordion"></div></div>
+            <div id="management" class="tab-content hidden"><h2 class="section-title text-3xl font-bold mb-6">💰 예산 및 준비물 관리</h2><div class="mb-12"><h3 class="font-bold text-xl mb-4 flex items-center gap-2"><ion-icon name="cash-outline"></ion-icon>예산 계획 (1인 기준)</h3><div class="overflow-x-auto bg-gray-50 p-4 rounded-lg"><table class="w-full text-left" id="budget-table"><thead><tr class="border-b"><th class="p-3">항목</th><th class="p-3 text-right">예상 비용 (KRW)</th><th class="p-3 text-center">상태</th></tr></thead><tbody><tr class="border-b"><td class="p-3">항공권</td><td class="p-3 text-right cost-cell" contenteditable="true">1370000</td><td class="p-3 text-center"><button class="status-toggle paid">결제 완료</button></td></tr><tr class="border-b"><td class="p-3">숙박비 (N빵기준)</td><td class="p-3 text-right cost-cell" contenteditable="true">1465704</td><td class="p-3 text-center"><button class="status-toggle pending">지출 예정</button></td></tr><tr class="border-b"><td class="p-3">교통비</td><td class="p-3 text-right cost-cell" contenteditable="true">500000</td><td class="p-3 text-center"><button class="status-toggle pending">지출 예정</button></td></tr><tr class="border-b"><td class="p-3">식비</td><td class="p-3 text-right cost-cell" contenteditable="true">2000000</td><td class="p-3 text-center"><button class="status-toggle pending">지출 예정</button></td></tr><tr class="border-b"><td class="p-3">관광/액티비티</td><td class="p-3 text-right cost-cell" contenteditable="true">600000</td><td class="p-3 text-center"><button class="status-toggle pending">지출 예정</button></td></tr><tr class="border-b"><td class="p-3">쇼핑</td><td class="p-3 text-right">+ α</td><td class="p-3 text-center"><span class="text-sm text-gray-500">별도 계산</span></td></tr></tbody><tfoot class="bg-gray-200"><tr><td class="p-3 font-extrabold text-lg">합계</td><td id="total-cost" class="p-3 text-right font-extrabold text-lg" colspan="2">5,935,704 + α</td></tr></tfoot></table></div></div><div class="mb-12"><h3 class="font-bold text-xl mb-4 flex items-center gap-2"><ion-icon name="bed-outline"></ion-icon>숙소 정보</h3><div class="space-y-4" id="accommodation-list"></div></div><div><div class="flex justify-between items-center mb-4"><h3 class="font-bold text-xl flex items-center gap-2"><ion-icon name="checkmark-done-outline"></ion-icon>체크리스트</h3><button id="add-checklist-section-btn" class="text-sm bg-blue-500 text-white font-semibold py-1 px-3 rounded-md hover:bg-blue-600 transition">+ 섹션 추가</button></div><div id="checklist-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div></div></div>
+            <div id="info" class="tab-content hidden"><h2 class="section-title text-3xl font-bold mb-6">🍽️ 추천 맛집 및 유용한 정보</h2><div class="mb-12"><h3 class="font-bold text-xl mb-4 flex items-center gap-2"><ion-icon name="restaurant-outline"></ion-icon>뉴욕 추천 맛집</h3><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="restaurant-list"></div></div><div><h3 class="font-bold text-xl mb-4 flex items-center gap-2"><ion-icon name="information-circle-outline"></ion-icon>유용한 정보</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="bg-gray-50 p-6 rounded-lg"><h4 class="font-bold mb-2">🚌 교통 예약 사이트</h4><ul class="space-y-1 list-disc list-inside"><li><a href="https://www.wanderu.com/" target="_blank" class="text-blue-500 hover:underline">Wanderu</a></li><li><a href="https://www.greyhound.com/" target="_blank" class="text-blue-500 hover:underline">Greyhound</a></li></ul></div><div class="bg-gray-50 p-6 rounded-lg"><h4 class="font-bold mb-2">🔗 관련 커뮤니티</h4><ul class="space-y-1 list-disc list-inside"><li><a href="https://cafe.naver.com/nyctourdesign" target="_blank" class="text-blue-500 hover:underline">미국 여행 디자인 카페</a></li><li><a href="https://athometrip.com/guesthouse/" target="_blank" class="text-blue-500 hover:underline">앳홈트립 (한인민박)</a></li></ul></div></div></div></div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-200 mt-12 py-6"><div class="max-w-7xl mx-auto px-4 text-center text-gray-600"><p>© 2025 Awesome Trip Planner V5. All rights reserved.</p></div></footer>
+    
+    <script>
+    // --- DATA STORE --- //
+    const DATA = {
+        itinerary: [
+             { day: 1, date: '10/23 (목)', title: '뉴욕 도착, 미드타운의 첫인상', details: '<b>오후:</b> ✈️ JFK 공항 도착 후 펜스테이션 숙소로 이동 (에어트레인 + LIRR 추천).<br><b>저녁:</b> 🏨 체크인 후 타임스퀘어의 화려한 네온사인과 인파를 느끼며 주변 탐방. 브라이언트 파크에서 잠시 휴식.<br><b>식사:</b> 🍽️ 저녁은 타임스퀘어 근처 Shake Shack에서 클래식한 미국 버거로 시작.', location: '뉴욕 (펜스테이션)' },
+            { day: 2, date: '10/24 (금)', title: '맨해튼의 심장, 전망대와 문화', details: '<b>오전:</b> 🏙️ 엠파이어 스테이트 빌딩 또는 탑 오브 더 락 전망대 방문 (일출 또는 오전에 방문 시 인파 적음, 사전 예매 필수).<br><b>점심:</b> 🥯 근처 Ess-a-Bagel에서 정통 뉴욕 베이글로 브런치.<br><b>오후:</b> 🛍️ 5번가(피프스 애비뉴)를 따라 걸으며 플래그십 스토어 구경.<br><b>저녁:</b> 🎭 브로드웨이에서 라이온 킹, 위키드 등 대표 뮤지컬 관람 (TKTS 부스에서 당일 할인 티켓 확인).', location: '뉴욕 (펜스테이션)' },
+            { day: 3, date: '10/25 (토)', title: '예술과 자연 속 하루, 뮤지엄 & 파크', details: '<b>오전:</b> 🎨 세계 3대 박물관 중 하나인 메트로폴리탄 미술관(MET) 관람 (한국어 오디오 가이드 활용).<br><b>점심:</b> 🌭 박물관 앞 푸드트럭에서 핫도그 등 간단하게 해결.<br><b>오후:</b> 🌳 센트럴 파크에서 자전거 대여하여 공원 한 바퀴 돌기 또는 쉽 메도우(Sheep Meadow)에 누워 여유 즐기기.<br><b>저녁:</b> 🍽️ 어퍼 웨스트 사이드에서 분위기 좋은 레스토랑에서 저녁 식사.', location: '뉴욕 (펜스테이션)' },
+            { day: 4, date: '10/26 (일)', title: '대자연을 향해, 나이아가라로', details: '<b>오전:</b> 🧳 짐 보관소에 캐리어 맡긴 후 공항으로 이동.<br><b>오후:</b> ✈️ 뉴욕 → 버팔로 비행 (예약번호 JPO76U). 버팔로 공항에서 셔틀 또는 Uber로 나이아가라 호텔 이동.<br><b>저녁:</b> 🏨 메리어트 호텔 체크인 후 캐나다 쪽에서 보는 조명 켜진 폭포 야경 감상. 클리프턴 힐(Clifton Hill) 거리 구경.', location: '나이아가라' },
+            { day: 5, date: '10/27 (월)', title: '폭포의 함성, 뉴욕으로 복귀', details: '<b>오전:</b> 🌊 혼블로워 크루즈(캐나다 측) 또는 바람의 동굴(미국 측) 체험으로 폭포를 온몸으로 느끼기. (우비 필수!)<br><b>오후:</b> 🚌 나이아가라 → 버팔로 공항 이동하여 뉴욕행 비행기 탑승.<br><b>저녁:</b> 🏨 뉴저지 North Bergen 숙소 체크인. 맨해튼 야경을 보며 휴식.', location: '뉴욕 (노스 버겐)' },
+            { day: 6, date: '10/28 (화)', title: '역사와 금융의 중심, 다운타운', details: '<b>오전:</b> 🏛️ 9/11 메모리얼 & 박물관 방문하여 추모의 시간 갖기. 이어서 원 월드 전망대에서 맨해튼 전경 감상.<br><b>점심:</b> 🥪 근처 Katz\'s Delicatessen에서 영화 ‘해리가 샐리를 만났을 때’에 나온 파스트라미 샌드위치 맛보기.<br><b>오후:</b> 🐂 월 스트리트의 돌진하는 황소상과 사진 찍기 (황소 부랄 만지면 부자 된다는 속설이 있음).', location: '뉴욕 (노스 버겐)' },
+            { day: 7, date: '10/29 (수)', title: '자유와 낭만의 상징, 브루클린', details: '<b>오전:</b> 🗽 스테튼 아일랜드 페리(무료)를 타고 자유의 여신상 조망.<br><b>오후:</b> 🌉 브루클린 브릿지를 맨해튼 방향으로 걸으며 멋진 스카이라인 감상.<br><b>저녁:</b> 📸 덤보(DUMBO)에서 무한도전 촬영지로 유명한 포토 스팟에서 인생샷 찍기. 🍕 저녁은 근처 Grimaldi\'s 또는 Juliana\'s Pizza에서.', location: '뉴욕 (노스 버겐)' },
+            { day: 8, date: '10/30 (목)', title: '트렌디한 뉴욕, 첼시 & 하이라인', details: '<b>오전:</b> 🍽️ 첼시 마켓에서 랍스터, 타코 등 다양한 음식으로 브런치 즐기기.<br><b>오후:</b> 🚶‍♂️ 폐철길을 공원으로 바꾼 하이라인 파크를 따라 산책하며 도시와 자연의 조화 감상. 허드슨 야드의 베슬(Vessel) 건축물 구경.<br><b>저녁:</b> 🎨 첼시/미트패킹 디스트릭트의 갤러리 탐방 또는 루프탑 바에서 칵테일 한잔.', location: '뉴욕 (노스 버겐)' },
+            { day: 9, date: '10/31 (금)', title: '예술과 젊음의 거리, 소호 & 빌리지', details: '<b>오전:</b> 🛍️ 소호(SoHo)의 특색있는 부티크와 편집샵, 브랜드 스토어 구경.<br><b>점심:</b> 🍕 프린스 스트리트 피자에서 페퍼로니 스퀘어 피자 맛보기.<br><b>오후:</b> 🏘️ 그리니치 빌리지의 아기자기한 거리와 워싱턴 스퀘어 파크의 개선문, 버스킹 공연 즐기기.<br><b>저녁:</b> 🎶 블루노트(Blue Note) 등 재즈 클럽에서 라이브 공연 감상.', location: '뉴욕 (노스 버겐)' },
+            { day: 10, date: '11/1 (토)', title: '나만의 뉴욕, 자유 시간', details: '😎 이전에 못 갔던 곳 다시 방문하기, 관심있는 동네(윌리엄스버그 등) 탐방, 또는 쇼핑에 집중하는 시간.<br>🎁 우드버리 아울렛 방문도 고려.', location: '뉴욕 (노스 버겐)' },
+            { day: 11, date: '11/2 (일)', title: '미국의 심장, 워싱턴 D.C.', details: '<b>오전:</b> 🚌 메가버스/볼트버스 등을 이용하여 뉴욕 → 워싱턴 D.C. 이동.<br><b>오후:</b> 🏨 Yotel 체크인 후 내셔널 몰(National Mall) 탐방 시작. 링컨 기념관부터 한국전 참전용사 기념비, 워싱턴 기념탑까지 둘러보기.<br><b>저녁:</b> 🏛️ 조명이 켜진 국회의사당과 기념탑들의 야경 감상.', location: '워싱턴 D.C.' },
+            { day: 12, date: '11/3 (월)', title: '살아있는 박물관 투어 후 뉴욕 복귀', details: '<b>오전:</b> 🏛️ 스미소니언 박물관 중 자연사 박물관(영화 ‘박물관이 살아있다’ 배경) 또는 항공우주 박물관 집중 관람.<br><b>오후:</b> 🚌 워싱턴 D.C. → 뉴욕 복귀.<br><b>저녁:</b> 🏨 퀸즈 숙소 체크인 후 주변에서 간단히 저녁 식사.', location: '뉴욕 (퀸즈)' },
+            { day: 13, date: '11/4 (화)', title: '뉴욕의 또 다른 얼굴, 퀸즈', details: '<b>오전:</b> 🌏 퀸즈의 다양한 문화를 체험할 수 있는 플러싱(아시아) 또는 아스토리아(그리스) 지역 탐방.<br><b>오후:</b> 🎨 모마 PS1(현대 미술) 또는 움직이는 이미지 박물관(Museum of the Moving Image) 관람.<br><b>저녁:</b> ⚾️ 시즌이 맞는다면 야구 경기 관람도 좋은 경험.', location: '뉴욕 (퀸즈)' },
+            { day: 14, date: '11/5 (수)', title: '마지막 날, 아쉬움 달래기', details: '<b>오전:</b> 🛍️ 센츄리 21, TJ Maxx 등에서 마지막 쇼핑 즐기기.<br><b>점심:</b> 🍰 Junior\'s Cheesecake에서 뉴욕 치즈케이크로 당 충전.<br><b>오후:</b> 🌃 이스트 강 페리를 타고 맨해튼 스카이라인을 감상하며 여행 정리. 루프탑 바에서 뉴욕의 마지막 밤 즐기기.<br><b>저녁:</b> 🧳 여행 짐 최종 정리.', location: '뉴욕 (퀸즈)' },
+            { day: 15, date: '11/6 (목)', title: '일상으로, 한국으로 출발', details: '<b>오전:</b> 🛫 공항으로 이동 전, 가벼운 아침 식사 후 JFK 공항으로 이동.<br><b>낮:</b> ✈️ 12:00 뉴욕 출발. 즐거웠던 추억을 안고 한국으로.', location: '뉴욕 (퀸즈)' },
+        ],
+        accommodations: [
+            { dates: '10/23-26', name: '펜스테이션 게스트하우스', price: '591,408원', booked: true },
+            { dates: '10/26-27', name: '메리어트 나이아가라폴스뷰', price: '350,000원', booked: true },
+            { dates: '10/27-11/2', name: 'North Bergen 에어비앤비', price: '1,030,000원', booked: true },
+            { dates: '11/2-3', name: 'Yotel 워싱턴 D.C.', price: '240,000원', booked: true },
+            { dates: '11/3-6', name: '뉴욕 퀸즈 에어비앤비', price: '720,000원', booked: false },
+        ],
+        restaurants: [
+            { name: "Peter Luger Steak House", food: "드라이에이징 스테이크", image: "https://images.unsplash.com/photo-1546964124-6cce4631e183?q=80&w=800&auto=format&fit=crop", mapUrl: "https://maps.google.com/?q=Peter+Luger+Steak+House+Brooklyn" },
+            { name: "Katz's Delicatessen", food: "파스트라미 샌드위치", image: "https://images.unsplash.com/photo-1551829032-95be2b141999?q=80&w=800&auto=format&fit=crop", mapUrl: "https://maps.google.com/?q=Katz's+Delicatessen" },
+            { name: "Joe's Pizza", food: "클래식 뉴욕 피자", image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?q=80&w=800&auto=format&fit=crop", mapUrl: "https://maps.google.com/?q=Joe's+Pizza+Carmine+St" },
+            { name: "Ess-a-Bagel", food: "뉴욕 베이글 & 크림치즈", image: "https://images.unsplash.com/photo-1620894589578-053673e2103a?q=80&w=800&auto=format&fit=crop", mapUrl: "https://maps.google.com/?q=Ess-a-Bagel" },
+            { name: "Junior's Cheesecake", food: "오리지널 치즈케이크", image: "https://images.unsplash.com/photo-1609424724990-25659714352b?q=80&w=800&auto=format&fit=crop", mapUrl: "https://maps.google.com/?q=Junior's+Restaurant+%26+Cheesecake" },
+            { name: "첼시마켓 랍스터 플레이스", food: "신선한 랍스터 찜", image: "https://images.unsplash.com/photo-1559561937-2f3b19c25f48?q=80&w=800&auto=format&fit=crop", mapUrl: "https://maps.google.com/?q=Lobster+Place+Chelsea+Market" },
+        ],
+        checklist: [
+            { title: "예약 (~7/31)", items: [{ text: "식당/버스/투어 예약", checked: false }, { text: "항공권 예약 완료", checked: true }, { text: "숙소 예약 완료", checked: true }, { text: "여권 유효기간 확인", checked: false }] },
+            { title: "준비 (~9/30)", items: [{ text: "ESTA 신청", checked: false }, { text: "여행자 보험", checked: false }, { text: "환전/통신(Esim)", checked: false }, { text: "앱 설치/계획 구체화", checked: false }] },
+            { title: "출국 (~10/23)", items: [{ text: "짐 싸기", checked: false }, { text: "상비약 준비 (멜라토닌 등)", checked: false }] }
+        ]
+    };
+
+    // --- RENDER FUNCTIONS --- //
+    const renderItinerary = () => {
+        const container = document.getElementById('itinerary-accordion');
+        if (!container) return;
+        container.innerHTML = DATA.itinerary.map(item => `
+            <div class="border rounded-lg overflow-hidden bg-white">
+                <div class="accordion-header flex justify-between items-center p-4 cursor-pointer">
+                    <div class="flex items-center gap-4"><span class="font-bold text-blue-600 w-8 text-center">Day ${item.day}</span>
+                        <div><p class="font-bold text-lg">${item.title}</p><p class="text-sm text-gray-500">${item.date} · ${item.location}</p></div>
+                    </div><ion-icon name="chevron-down-outline" class="text-2xl transition-transform duration-300"></ion-icon>
+                </div>
+                <div class="accordion-content bg-gray-50/70"><div class="p-4 sm:p-5 border-t text-gray-700 leading-relaxed text-sm">${formatItineraryDetails(item.details)}</div></div>
+            </div>`).join('');
+    };
+    
+    const renderAccommodations = () => {
+        const container = document.getElementById('accommodation-list');
+        if (!container) return;
+        container.innerHTML = DATA.accommodations.map(item => {
+            const priceValue = parseFloat(item.price.replace(/,/g, '')) || 0;
+            const pricePerPerson = Math.round(priceValue / 2);
+            return `
+             <div class="bg-gray-50 p-4 rounded-lg border">
+                 <div class="flex flex-wrap justify-between items-start gap-2">
+                    <div>
+                        <p class="font-bold">${item.name}</p>
+                        <p class="text-sm text-gray-600">${item.dates} | 총 ${item.price}</p>
+                        <p class="text-sm text-blue-600 font-semibold">인당 ${pricePerPerson.toLocaleString()}원</p>
+                    </div>
+                    <button class="status-toggle ${item.booked ? 'paid' : 'pending'}">${item.booked ? '예약 완료' : '예약 예정'}</button>
+                 </div>
+                 <div class="mt-3"><input type="text" placeholder="체크인 시간, 특이사항 등 메모" class="w-full p-2 border rounded-md text-sm focus:ring-2 focus:ring-blue-500"></div>
+             </div>`;
+        }).join('');
+    };
+
+    const renderRestaurants = () => {
+        const container = document.getElementById('restaurant-list');
+        if (!container) return;
+        container.innerHTML = DATA.restaurants.map(r => `
+            <div class="border rounded-lg overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 shadow-md bg-white">
+                <img src="${r.image}" alt="${r.name}" class="w-full h-40 object-cover" onerror="this.src='https://placehold.co/800x400/ccc/fff?text=${encodeURIComponent(r.name)}';">
+                <div class="p-4"><h4 class="font-bold text-lg">${r.name}</h4><p class="text-sm text-gray-600 mb-3">${r.food}</p><a href="${r.mapUrl}" target="_blank" class="text-sm font-semibold text-blue-500 hover:text-blue-600">지도에서 보기 →</a></div>
+            </div>`).join('');
+    };
+
+    const renderChecklist = () => {
+        const container = document.getElementById('checklist-container');
+        if (!container) return;
+        container.innerHTML = DATA.checklist.map((section, sectionIndex) => `
+            <div class="bg-gray-50 p-4 rounded-lg checklist-section relative">
+                <div class="flex justify-between items-center mb-2">
+                    <h4 class="font-bold" contenteditable="true" data-section-index="${sectionIndex}">${section.title}</h4>
+                    <button class="delete-section-btn text-gray-400 hover:text-red-500" data-section-index="${sectionIndex}"><ion-icon name="close-circle-outline"></ion-icon></button>
+                </div>
+                <ul class="space-y-2 text-sm">
+                    ${section.items.map((item, itemIndex) => `
+                        <li class="checklist-item flex items-center justify-between">
+                            <label class="flex items-center flex-grow">
+                                <input type="checkbox" class="mr-2" ${item.checked ? 'checked' : ''} data-section-index="${sectionIndex}" data-item-index="${itemIndex}">
+                                <span class="checklist-item-text" contenteditable="true" data-section-index="${sectionIndex}" data-item-index="${itemIndex}">${item.text}</span>
+                            </label>
+                            <button class="delete-btn text-gray-400 hover:text-red-500 text-xs" data-section-index="${sectionIndex}" data-item-index="${itemIndex}"><ion-icon name="remove-circle-outline"></ion-icon></button>
+                        </li>
+                    `).join('')}
+                </ul>
+                <button class="add-item-btn mt-3 text-xs text-blue-500 font-semibold" data-section-index="${sectionIndex}">+ 항목 추가</button>
+            </div>
+        `).join('');
+    };
+
+    // --- HELPERS --- //
+    const formatItineraryDetails = (details) => {
+        return `<ul class="space-y-3">${details.split('<br>').map(line => {
+            const parts = line.split(':</b>');
+            if(parts.length > 1) {
+                return `<li class="flex items-start"><strong class="w-16 shrink-0 text-right mr-2 text-gray-500 font-medium">${parts[0].replace(/<b>/g, '')}:</strong><span class="flex-1">${parts[1]}</span></li>`;
+            } return `<li>${line}</li>`;
+        }).join('')}</ul>`;
+    };
+    
+    const updateTotal = () => {
+        let total = 0;
+        document.querySelectorAll('#budget-table .cost-cell').forEach(cell => {
+            total += parseFloat(cell.innerText.replace(/,/g, '')) || 0;
+        });
+        const totalCostEl = document.getElementById('total-cost');
+        if (totalCostEl) {
+            totalCostEl.innerText = total.toLocaleString() + ' + α';
+        }
+    };
+
+    // --- EVENT HANDLERS for Checklist --- //
+    const addChecklistSection = () => {
+        const newTitle = prompt("새로운 체크리스트 섹션 제목을 입력하세요:", "새로운 목록");
+        if (newTitle) {
+            DATA.checklist.push({ title: newTitle, items: [{text: "새 항목", checked: false}] });
+            renderChecklist();
+        }
+    };
+
+    // --- INITIALIZATION & EVENT LISTENERS --- //
+    document.addEventListener('DOMContentLoaded', () => {
+        // Initial Render
+        renderItinerary();
+        renderAccommodations();
+        renderRestaurants();
+        renderChecklist();
+        
+        // Initial Budget Formatting
+        document.querySelectorAll('.cost-cell').forEach(cell => {
+            cell.innerText = (parseFloat(cell.innerText) || 0).toLocaleString();
+        });
+        updateTotal();
+
+        // Add Checklist Section Button
+        document.getElementById('add-checklist-section-btn')?.addEventListener('click', addChecklistSection);
+
+        // Event Delegation for dynamically created elements
+        document.body.addEventListener('click', e => {
+            const target = e.target;
+            // Tabs
+            if (target.closest('.tab-button')) {
+                const tabName = target.closest('.tab-button').dataset.tab;
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+                document.getElementById(tabName)?.classList.remove('hidden');
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                target.closest('.tab-button').classList.add('active');
+            }
+            // Accordion
+            if (target.closest('.accordion-header')) {
+                const header = target.closest('.accordion-header');
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('ion-icon');
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            }
+            // Status Toggles
+            if (target.closest('.status-toggle')) {
+                const button = target.closest('.status-toggle');
+                if (button.classList.contains('pending')) {
+                    button.classList.replace('pending', 'paid');
+                    button.textContent = button.textContent.replace('예정', '완료');
+                } else {
+                    button.classList.replace('paid', 'pending');
+                    button.textContent = button.textContent.replace('완료', '예정');
+                }
+            }
+            // Checklist: Add Item
+            if (target.closest('.add-item-btn')) {
+                const sectionIndex = target.closest('.add-item-btn').dataset.sectionIndex;
+                DATA.checklist[sectionIndex].items.push({ text: "새 항목", checked: false });
+                renderChecklist();
+            }
+            // Checklist: Remove Item
+            if (target.closest('.delete-btn')) {
+                const button = target.closest('.delete-btn');
+                const sectionIndex = button.dataset.sectionIndex;
+                const itemIndex = button.dataset.itemIndex;
+                DATA.checklist[sectionIndex].items.splice(itemIndex, 1);
+                renderChecklist();
+            }
+             // Checklist: Remove Section
+            if (target.closest('.delete-section-btn')) {
+                const button = target.closest('.delete-section-btn');
+                const sectionIndex = button.dataset.sectionIndex;
+                 if (confirm(`'${DATA.checklist[sectionIndex].title}' 섹션을 삭제하시겠습니까?`)) {
+                    DATA.checklist.splice(sectionIndex, 1);
+                    renderChecklist();
+                }
+            }
+        });
+
+        // Event delegation for 'blur' and 'change' events
+        document.body.addEventListener('focusout', e => {
+            const target = e.target;
+            // Budget Table
+            if (target.matches('.cost-cell')) {
+                const value = parseFloat(target.innerText.replace(/,/g, '')) || 0;
+                target.innerText = value.toLocaleString();
+                updateTotal();
+            }
+            // Checklist Title
+            if (target.matches('.checklist-section h4')) {
+                const sectionIndex = target.dataset.sectionIndex;
+                DATA.checklist[sectionIndex].title = target.innerText;
+            }
+            // Checklist Item Text
+            if (target.matches('.checklist-item-text')) {
+                const sectionIndex = target.dataset.sectionIndex;
+                const itemIndex = target.dataset.itemIndex;
+                DATA.checklist[sectionIndex].items[itemIndex].text = target.innerText;
+            }
+        });
+
+        document.body.addEventListener('change', e => {
+            const target = e.target;
+            // Checklist Checkbox
+            if (target.matches('.checklist-item input[type="checkbox"]')) {
+                const sectionIndex = target.dataset.sectionIndex;
+                const itemIndex = target.dataset.itemIndex;
+                DATA.checklist[sectionIndex].items[itemIndex].checked = target.checked;
+            }
+        });
+    });
+    </script>
+</body>
+</html>
